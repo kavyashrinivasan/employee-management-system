@@ -74,10 +74,20 @@ for POST, GET, PUT, DELETE requests.
 
 ## Screenshots
 ### POST API Response
-<img width="884" height="565" alt="image" src="https://github.com/user-attachments/assets/96c346c4-f985-4e07-9cbf-e22e54848363" />
+<img width="869" height="583" alt="image" src="https://github.com/user-attachments/assets/7a2f7b82-73b7-436e-be31-3fac136f7a8e" />
+
 
 ### GET API Response
-<img width="930" height="555" alt="image" src="https://github.com/user-attachments/assets/31c355e6-ad14-4a58-968c-cbfd059c6384" />
+<img width="862" height="611" alt="image" src="https://github.com/user-attachments/assets/8a6529de-a089-49de-88d2-86cbbc562d8c" />
+
+### PUT API Response
+<img width="856" height="483" alt="image" src="https://github.com/user-attachments/assets/a4106297-4b04-4ea8-a15f-29a6d003e842" />
+
+### DELETE API Response
+<img width="877" height="467" alt="image" src="https://github.com/user-attachments/assets/764c0fbf-1fb6-43e1-99af-5c6dcc42a88b" />
+
+### Database Table
+<img width="634" height="246" alt="image" src="https://github.com/user-attachments/assets/807709d6-2ec6-486a-86cb-41742a19edb9" />
 
 ## Author
 Kavya Srinivasan
