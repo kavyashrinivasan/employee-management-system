@@ -5,6 +5,10 @@ import com.kavya.employee.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.kavya.employee.DTO.EmployeeRequestDTO;
+import com.kavya.employee.DTO.EmployeeResponseDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -15,15 +19,23 @@ public class EmployeeController {
     @Autowired
     private EmployeeService service;
 
-    @GetMapping
+   /* @GetMapping
     public List<Employee> getAll() {
         return service.getAllEmployees();
-    }
+    }*/
+   @GetMapping
+   public Page<Employee> getAll(Pageable pageable) {
+       return service.getAllEmployees(pageable);
+   }
 
-    @PostMapping
+   /* @PostMapping
     public Employee addEmployee(@Valid @RequestBody Employee emp) {
         return service.saveEmployee(emp);
-    }
+    }*/
+   @PostMapping
+   public EmployeeResponseDTO addEmployee(@Valid @RequestBody EmployeeRequestDTO dto) {
+       return service.saveEmployee(dto);
+   }
 
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable Long id,
