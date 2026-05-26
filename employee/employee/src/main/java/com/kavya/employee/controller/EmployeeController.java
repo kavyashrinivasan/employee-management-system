@@ -53,4 +53,16 @@ public class EmployeeController {
     public Employee getEmployeeById(@PathVariable Long id) {
         return service.getEmployeeById(id);
     }
+
+
+    @GetMapping("/search")
+    public Page<EmployeeResponseDTO> searchEmployees(
+            @RequestParam String name,
+            Pageable pageable) {
+
+        return service.searchEmployees(
+                name,
+                pageable
+        );
+    }
 }

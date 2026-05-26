@@ -1,6 +1,8 @@
 package com.kavya.employee.service;
 
+import com.kavya.employee.entity.Department;
 import com.kavya.employee.entity.Employee;
+import com.kavya.employee.repository.DepartmentRepository;
 import com.kavya.employee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.kavya.employee.DTO.EmployeeRequestDTO;
 import com.kavya.employee.DTO.EmployeeResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+//import java.awt.print.Pageable;
 
 import java.util.List;
 @Service
@@ -20,13 +23,16 @@ public class EmployeeService {
   /*  public List<Employee> getAllEmployees() {
         return repository.findAll();
     }*/
-  public Page<Employee> getAllEmployees(Pageable pageable) {
+  @Autowired
+  private DepartmentRepository departmentRepository;
+ public Page<Employee> getAllEmployees(Pageable pageable) {
       return repository.findAll(pageable);
   }
 
     /*public Employee saveEmployee(Employee emp) {
         return repository.save(emp);
     }*/
+
     public EmployeeResponseDTO saveEmployee(EmployeeRequestDTO dto) {
 
         Employee employee = new Employee();
@@ -36,6 +42,13 @@ public class EmployeeService {
         employee.setRole(dto.getRole());
         employee.setSalary(dto.getSalary());
 
+        if (dto.getDepartmentId() != null) {
+            Department department =
+                    departmentRepository.findById(dto.getDepartmentId())
+                            .orElseThrow(() -> new RuntimeException("Department not found"));
+            employee.setDepartment(department);
+        }
+
         Employee savedEmployee = repository.save(employee);
         EmployeeResponseDTO responseDTO = new EmployeeResponseDTO();
 
@@ -43,7 +56,9 @@ public class EmployeeService {
         responseDTO.setName(savedEmployee.getName());
         responseDTO.setEmail(savedEmployee.getEmail());
         responseDTO.setRole(savedEmployee.getRole());
-
+        if (savedEmployee.getDepartment() != null) {
+            responseDTO.setDepartmentId(savedEmployee.getDepartment().getId());
+        }
         return responseDTO;
     }
     public Employee updateEmployee(Long id, Employee updatedEmployee) {
@@ -64,5 +79,21 @@ public class EmployeeService {
     public Employee getEmployeeById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
+    }
+
+   /* public List<Employee> searchByName(String name){
+        return repository.findByNameContainingIgnoreCase(name);
+    }*/
+    public Page<EmployeeResponseDTO> searchEmployees(String name, Pageable pageable) {
+        Page<Employee> employeePage = repository.findByNameContainingIgnoreCase(name, pageable);
+        return employeePage.map(employee -> {
+            EmployeeResponseDTO dto = new EmployeeResponseDTO();
+            dto.setId(employee.getId());
+            dto.setName(employee.getName());
+            dto.setEmail(employee.getEmail());
+            dto.setRole(employee.getRole());
+
+            return dto;
+        });
     }
 }

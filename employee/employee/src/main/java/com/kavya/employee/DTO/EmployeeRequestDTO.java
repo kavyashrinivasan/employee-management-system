@@ -5,49 +5,60 @@ import jakarta.validation.constraints.NotBlank;
 
 public class EmployeeRequestDTO {
 
-    @NotBlank(message = "Name cannot be empty")
-    private String name;
 
-    @Email(message = "Invalid email format")
-    private String email;
+        @NotBlank(message = "Name cannot be empty")
+        private String name;
 
-    @NotBlank(message = "Role cannot be empty")
-    private String role;
+        @Email(message = "Invalid email format")
+        private String email;
 
-    @Min(value = 1, message = "Salary must be greater than 0")
-    private Double salary;
+        @NotBlank(message = "Role cannot be empty")
+        private String role;
 
-    public String getName() {
-        return name;
-    }
+        @Min(value = 1, message = "Salary must be greater than 0")
+        private Double salary;
 
-    public String getEmail() {
-        return email;
-    }
+        private Long departmentId;
 
-    public String getRole() {
-        return role;
-    }
+        // GETTERS
+        public String getName() {
+            return name;
+        }
 
-    public Double getSalary() {
-        return salary;
-    }
+        public String getEmail() {
+            return email;
+        }
 
-    // SETTERS
+        public String getRole() {
+            return role;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+        public Double getSalary() {
+            return salary;
+        }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+        public Long getDepartmentId() {
+            return departmentId;
+        }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+        // SETTERS
+        public void setName(String name) {
+            this.name = name;
+        }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
-    }
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public void setRole(String role) {
+            this.role = role;
+        }
+
+        public void setSalary(Double salary) {
+            this.salary = salary;
+        }
+
+        public void setDepartmentId(Long departmentId) {
+            this.departmentId = departmentId;
+        }
 }

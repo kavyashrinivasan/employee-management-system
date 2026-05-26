@@ -8,6 +8,7 @@ public class EmployeeResponseDTO {
     public Long getId() {
         return id;
     }
+    private Long departmentId;
 
     public String getName() {
         return name;
@@ -19,6 +20,10 @@ public class EmployeeResponseDTO {
 
     public String getRole() {
         return role;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
     // SETTERS
@@ -37,5 +42,9 @@ public class EmployeeResponseDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 }
